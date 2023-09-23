@@ -1,0 +1,10 @@
+wikipedia
+openai
+tiktoken
+transformers
+diffusers
+accelerate
+pydub
+langchain
+python-dotenv
+ffprobe
