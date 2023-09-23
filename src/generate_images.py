@@ -61,7 +61,7 @@ def load_image_models():
   return base_sdxl, refiner
 
 
-def generate_cover(prompt:str, negative_prompt:str=None, seed:int=42):
+def generate_cover(prompt:str, negative_prompt:str=None, seed:int=42, save_filename:str=None):
   """Generates a cover for our podcast. It load models, generate image given prompts and return image."""
   base_sdxl, refiner = load_image_models()
   image = generate_image(prompt,
@@ -69,14 +69,6 @@ def generate_cover(prompt:str, negative_prompt:str=None, seed:int=42):
                           seed=seed,
                           base_sdxl=base_sdxl,
                           refiner=refiner)
+  if save_filename:
+    image.save(save_filename)
   return image
-
-
-def print_podcast_cover(image, bird_name:str):
-  """Displays generated cover"""
-  plt.figure(figsize=(10, 10))
-  plt.imshow(image)
-  plt.axis('off')
-  plt.suptitle('BIRDS ARE AWSOME!', fontweight ="bold", fontsize = 25)
-  plt.title(f"All you need to know about {bird_name.title()}", fontsize = 15)
-  plt.show()
