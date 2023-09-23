@@ -8,3 +8,5 @@ pydub
 langchain
 python-dotenv
 ffprobe
+torch>=2.0
+audiocraft

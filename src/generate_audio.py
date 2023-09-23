@@ -77,18 +77,27 @@ def generate_audio_effects(descriptions:list[str]):
 
 def create_audio_sample(description:str, save_filename:str=None):
     """Generate a music for intro using a text prompt and MusicGen model."""
-    audio = generate_musics_sample_from_descriptions([description], duration=15)[0]
-    if save_filename:
-        audio_write(save_filename, audio.cpu(), sample_rate=32000)
+    if not os.path.isfile("audios/intro_main_song.wav"):
+      audio = generate_musics_sample_from_descriptions([description], duration=15)[0]
+      if save_filename:
+          audio_write(save_filename, audio.cpu(), sample_rate=32000)
+    else:
+      print("Intro song already created")
+      audio = AudioSegment.from_wav("audios/intro_main_song.wav")
     return audio
 
 
 def create_effects_sample(description:str, save_filename:str=None):
     """Generate a sound effect for intro using a text prompt and AudioGen model."""
-    effect = generate_audio_effects([description])[0]
-    if save_filename:
-        audio_write(save_filename, effect.cpu(), sample_rate=16000)
+    if not os.path.isfile(f"{save_filename}.wav"):
+      effect = generate_audio_effects([description])[0]
+      if save_filename:
+          audio_write(save_filename, effect.cpu(), sample_rate=16000)
+    else:
+      print("Intro effect already created")
+      effect = AudioSegment.from_wav(f"{save_filename}.wav")
     return effect
+
 
 
 def add_into_ontro_podcast_audio(podcast_audio_file:str):

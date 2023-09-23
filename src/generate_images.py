@@ -43,7 +43,7 @@ def load_image_models():
                                           variant="fp16",
                                           force_download=True,
                                           resume_download=False)
-  # base_sdxl.to("cuda")
+  base_sdxl.to("cuda")
   base_sdxl.enable_attention_slicing()
 
   # Load model - stable-diffusion-xl-refiner-1.0
